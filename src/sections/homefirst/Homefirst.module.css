@@ -1,0 +1,38 @@
+.top_section {
+  height: 85vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+padding: 100px;
+  /* padding-left: 70px;
+  margin-bottom: 40px; */
+}
+
+.banner_content {
+  max-width: 500px;
+}
+
+.small_text {
+  font-size: 20px;
+  color: white;
+  background-color: red;
+  width: max-content;
+  padding: 5px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.banner_title {
+  font-size: 55px;
+  line-height: 65px;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.banner_bottom {
+  font-size: 22px;
+  color: #555;
+}

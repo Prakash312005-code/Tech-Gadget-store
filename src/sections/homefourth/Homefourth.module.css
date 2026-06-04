@@ -1,0 +1,27 @@
+.home {
+  background-color: whitesmoke;
+  /* height: 90vh; */
+  padding: 20px;
+  
+}
+.homefourth {
+  
+    background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+.fourthcontent {
+  background-color: white;
+  overflow: hidden;
+  clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+  
+}
+
+.fourthcontext {
+  padding: 20px;
+  margin: 20px;
+ 
+  width:400px;
+}

@@ -1,0 +1,26 @@
+.homesection{
+   
+  background-color: whitesmoke;
+ 
+  padding: 20px;
+}
+
+.Homefifth{
+
+    background-color: black;
+  display: flex;
+ 
+}
+.fifthcontent{
+    color: white;
+padding: 50px;
+background-color: black;
+width: 50%;
+
+}
+.fifthcontext{
+
+overflow: hidden;
+height: 60vh;
+ clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+}

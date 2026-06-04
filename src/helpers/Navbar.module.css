@@ -1,0 +1,10 @@
+.nav_text p{
+cursor:pointer;
+transition:0.3s;
+margin-bottom:3px;
+}
+
+.nav_text p:hover{
+border-bottom:2px solid black;
+
+}

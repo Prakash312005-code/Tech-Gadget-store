@@ -1,0 +1,41 @@
+.shopname p{
+         display: flex;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 600;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+ .shopmain{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 10px;
+    background-color: white;
+    
+ }
+ 
+
+
+.shopone img{
+    width: 220px;
+    transition: transform 0.4s ease;
+}
+
+.shopone img:hover{
+    transform: scale(1.1);
+}
+ .shopone{
+     border: 5px solid whitesmoke;
+      padding: 55px;  
+    border-radius: 300px;
+    
+ }
+ .itemname {
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 500;
+ }

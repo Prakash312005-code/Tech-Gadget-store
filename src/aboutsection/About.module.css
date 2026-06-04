@@ -1,0 +1,35 @@
+.about{
+padding: 20px;
+display: flex;
+
+}
+
+
+.aboutimage{
+
+    display: flex;
+     justify-content: space-between;
+   padding: 20px;
+    height: 70vh;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+background-repeat: no-repeat;
+background-repeat: no-repeat;
+}
+    
+.abouttext{
+    font-size: 50px;
+  /* background-color: whitesmoke; */
+    font-weight: 600;
+      display: flex;
+    justify-content: space-evenly;
+}
+.aboutpara{
+    font-size: 20px;
+     width: 90%; 
+     margin: 40px;   
+    padding: 20px;
+    font-weight: 400;
+     
+}

@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+  import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  import Navbar from "./helpers/Navbar";
+  import Footer from "./helpers/footer/Footer";
+  import Footerend from "./helpers/footerend/Footerend";
+
+  import Routing from "./routing/Routing";
+
+import React, {useState,useEffect,} from "react";
+
+  function App() {
+    
+
+    // CART STATE
+    const [cart, setCart] = useState(
+
+  JSON.parse(
+    localStorage.getItem("cart")
+  ) || []
+
+);
+
+    // SIDEBAR OPEN/CLOSE
+    const [showCart, setShowCart] = useState(false);
+    useEffect(() => {
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
   );
-}
 
-export default App;
+}, [cart]);
+
+    return (
+
+      <div>
+
+        <Navbar
+  cart={cart}
+  setShowCart={setShowCart}
+/>
+
+        <Routing
+          cart={cart}
+          setCart={setCart}
+          showCart={showCart}
+          setShowCart={setShowCart}
+        />
+
+        <Footer />
+
+        <Footerend />
+
+      </div>
+
+    );
+  }
+
+  export default App;

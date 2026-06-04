@@ -1,0 +1,31 @@
+.headtext {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 30px;
+  background-color:whitesmoke;
+  height: auto;
+  width: 100%;
+  gap: 20px;
+}
+.headimage {
+  background-repeat: no-repeat;
+  /* height: 500px; */
+  /* width: 80vh; */
+  border-radius: 20px;
+}
+.headcontext {
+  background-repeat: no-repeat;
+  /* height: 500px; */
+  /* width: 80vh;   */
+  border-radius: 20px;
+}
+
+.headcontent {
+  color: white;
+  padding: 70px;
+}
+.context {
+  color: white;
+  padding: 70px;
+}
