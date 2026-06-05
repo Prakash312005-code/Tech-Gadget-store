@@ -16,7 +16,7 @@ Need Help? Check Out Our Help Center</p>
     </div>
 
     <div className={Styles.fifthcontext}>
-      <img src={ftimg1}></img>
+      <img src={ftimg1} alt="footer logo"></img>
     </div>
     </div>
     </div> 

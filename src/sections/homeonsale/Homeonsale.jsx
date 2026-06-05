@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import Styles from '../../sections/homeonsale/Homeonsale.module.css'
-import os1 from '../../assets/onsalemobile.avif'
 import os2 from '../../assets/onsalewatch.avif'
 import os3 from '../../assets/oscamera.avif'
 import os4 from '../../assets/osglass.avif'
@@ -8,12 +7,10 @@ import os5 from '../../assets/oslap.avif'
 import os6 from '../../assets/osspeaker.avif'
 import hp9 from "../../assets/hp10.png";
 import hp13 from "../../assets/hp15.png";
-import { MdKeyboardArrowLeft } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import Buttons from "../../components/Buttons";
 import { useNavigate } from "react-router-dom";
-import products from '../../components/Productlist'
 const Homeonsale = () => {
   const navigate = useNavigate();
      const sliderRef = useRef(null);

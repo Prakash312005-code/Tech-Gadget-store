@@ -1,6 +1,5 @@
 import React from 'react'
 import bgimage from '../../assets/bgimage.png'
-import img2 from '../../assets/ChatGPT Image May 22, 2026, 09_46_17 PM.png'
 import Styles from '../homefirst/Homefirst.module.css'
 import Buttons from '../../components/Buttons'
 import { useNavigate } from "react-router-dom";

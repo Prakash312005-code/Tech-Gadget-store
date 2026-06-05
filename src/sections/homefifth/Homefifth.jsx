@@ -20,7 +20,7 @@ const Homefifth = () => {
     </div>
 
     <div className={Styles.fifthcontext}>
-      <img src={img7}></img>
+      <img src={img7} alt="product "></img>
     </div>
     </div>
     </div>

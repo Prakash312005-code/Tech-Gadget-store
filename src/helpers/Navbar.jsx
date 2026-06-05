@@ -3,9 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import { MdAccountCircle } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FaCartShopping } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { hover } from "@testing-library/user-event/dist/hover";
 import Styles from '../helpers/Navbar.module.css'
 const Navbar = ({
   cart,
@@ -18,9 +16,9 @@ const Navbar = ({
         height : '100px',
           fontSize: "50px",
           fontWeight: "600",
-          padding: "10px",
+        
           display: "flex",
-          alignItems: "center",
+       
           justifyContent: "space-between",
           alignItems : 'center',
           padding: "40px", 
