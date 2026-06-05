@@ -10,7 +10,7 @@ const Homefourth = () => {
     <div className={Styles.home} >
     <div className={Styles.homefourth}>
 <div className={Styles.fourthcontent}>
-<img src={img6} style={{height : '70vh' , objectFit : 'cover'}}></img>
+<img src={img6} alt="deals" style={{height : '70vh' , objectFit : 'cover'}}></img>
 </div>
 <div className={Styles.fourthcontext}>
 <p style={{ fontSize: "30px", fontWeight: "500" }}>Save up to</p>
