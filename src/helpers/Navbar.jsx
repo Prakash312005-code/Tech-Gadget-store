@@ -16,7 +16,7 @@ const Navbar = ({
         height : '100px',
           fontSize: "50px",
           fontWeight: "600",
-        
+      
           display: "flex",
        
           justifyContent: "space-between",
