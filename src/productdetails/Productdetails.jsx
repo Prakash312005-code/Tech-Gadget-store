@@ -1,309 +1,496 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import Styles from "../productdetails/Productdetails.module.css";
+import Products from "../components/Productlist";
 
-import { useParams } from "react-router-dom";
-
-import Products from '../components/Productlist';
-import { MdDelete } from "react-icons/md";
-import Styles from "./Productdetails.module.css";
-
-const Productdetails = ({
-  cart = [],
-  setCart,
-  showCart,
-  setShowCart,
-}) => {
+const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const singleProduct = Products.find(
-    (item) => item.id === Number(id)
-  );
-  const handleCart = () => {
+  const [singleProduct, setSingleProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-    const existingProduct = cart.find(
-      (item) => item.id === singleProduct.id
-    );
 
-    if (existingProduct) {
+  // JWT Token
+  const token = localStorage.getItem("token");
 
-      const updatedCart = cart.map((item) =>
 
-        item.id === singleProduct.id
+  // ================= GET PRODUCT =================
 
-          ? {
-            ...item,
-            quantity: item.quantity + 1,
+  useEffect(() => {
+
+    const fetchProduct = async () => {
+
+      try {
+
+        setLoading(true);
+
+        const response = await fetch(
+          `http://localhost:8080/api/products/${id}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch product");
+        }
+
+        const data = await response.json();
+
+        const localProduct = Products.find(
+          (product) => product.id === Number(id)
+        );
+
+        const formattedProduct = {
+          ...data,
+          content: data.name,
+          price: `$${Number(data.price).toFixed(2)}`,
+          delete:
+            data.oldPrice !== null &&
+            data.oldPrice !== undefined
+              ? `$${Number(data.oldPrice).toFixed(2)}`
+              : null,
+          image: localProduct ? localProduct.image : null,
+        };
+
+        setSingleProduct(formattedProduct);
+
+      } catch (error) {
+
+        console.error("Error fetching product:", error);
+
+      } finally {
+
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+
+  }, [id]);
+
+
+  // ================= LOAD CART =================
+
+  const loadCart = useCallback(async () => {
+
+    try {
+
+      const response = await fetch(
+       "http://localhost:8080/api/cart",
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`
           }
-
-          : item
+        }
       );
 
-      setCart(updatedCart);
+      if (!response.ok) {
+        throw new Error("Failed to load cart");
+      }
 
-    } else {
+      const data = await response.json();
 
-      setCart([
-        ...cart,
-        {
-          ...singleProduct,
-          quantity: 1,
-        },
-      ]);
+      const formattedCart = data.map((item) => {
 
+        const localProduct = Products.find(
+          (product) => product.id === item.product.id
+        );
+
+        return {
+          id: item.product.id,
+          content: item.product.name,
+          price: `$${Number(item.product.price).toFixed(2)}`,
+          delete:
+            item.product.oldPrice !== null &&
+            item.product.oldPrice !== undefined
+              ? `$${Number(item.product.oldPrice).toFixed(2)}`
+              : null,
+          image: localProduct ? localProduct.image : null,
+          quantity: item.quantity,
+          category: item.product.category,
+          sale: item.product.sale,
+        };
+      });
+
+      setCart(formattedCart);
+
+    } catch (error) {
+
+      console.error("Error loading cart:", error);
     }
 
-    setShowCart(true);
+  }, [ token, setCart]);
 
+
+  // Load Cart
+
+  useEffect(() => {
+
+    loadCart();
+
+  }, [loadCart]);
+
+
+  // ================= ADD TO CART =================
+
+  const handleCart = async () => {
+
+    if (!singleProduct) return;
+
+    try {
+
+      const response = await fetch(
+`http://localhost:8080/api/cart/add/${singleProduct.id}?quantity=${selectedQuantity}`,        {
+          method: "POST",
+
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to add product to cart");
+      }
+
+      await loadCart();
+
+      setShowCart(true);
+
+    } catch (error) {
+
+      console.error("Error adding product to cart:", error);
+    }
   };
 
- 
+
+  // ================= UPDATE QUANTITY =================
+
+  const updateQuantity = async (productId, newQuantity) => {
+
+    try {
+
+      const response = await fetch(
+`http://localhost:8080/api/cart/update/${productId}?quantity=${newQuantity}`,        {
+          method: "PUT",
+
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update quantity");
+      }
+
+      await loadCart();
+
+    } catch (error) {
+
+      console.error("Error updating quantity:", error);
+    }
+  };
+
+
+  // ================= DELETE PRODUCT =================
+
+  const deleteProduct = async (productId) => {
+
+    try {
+
+      const response = await fetch(
+`http://localhost:8080/api/cart/remove/${productId}`,        {
+          method: "DELETE",
+
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to remove product");
+      }
+
+      await loadCart();
+
+    } catch (error) {
+
+      console.error("Error removing product:", error);
+    }
+  };
+
+
+  // ================= CLEAR CART =================
+
+  const clearCart = async () => {
+
+    try {
+
+      const response = await fetch(
+`http://localhost:8080/api/cart/clear`,        {
+          method: "DELETE",
+
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to clear cart");
+      }
+
+      await loadCart();
+
+    } catch (error) {
+
+      console.error("Error clearing cart:", error);
+    }
+  };
+
+
+  // ================= LOADING =================
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!singleProduct) {
+    return <div>Product not found</div>;
+  }
+
+
+  // ================= UI =================
 
   return (
 
-    <div className={Styles.main_container}>
+    <div className={Styles["product-details-page"]}>
+
+      {/* Back Button */}
+
+      <button onClick={() => navigate(-1)}>
+        ← Back
+      </button>
 
 
+      {/* Product Details */}
 
-      <div className={Styles.left_section}>
+      <div className={Styles["product-details"]}>
 
-        <img
-          src={singleProduct.image}
-          alt=""
-          className={Styles.product_image}
-        />
+        <div className={Styles["product-image"]}>
 
-      </div>
+          <img
+            src={singleProduct.image}
+            alt={singleProduct.content}
+          />
+
+        </div>
 
 
-      <div className={Styles.right_section}>
+        <div className={Styles["product-info"]}>
 
-        <h1 className={Styles.title}>
-          {singleProduct.content}
-        </h1>
+          <h1>{singleProduct.content}</h1>
 
-        <div className={Styles.price_section}>
 
-          {singleProduct.delete && (
+          <div className={Styles["product-price"]}>
 
-            <del className={Styles.delete_price}>
-              {singleProduct.delete}
-            </del>
-
-          )}
-
-          <h2 className={Styles.price}>
             {singleProduct.price}
-          </h2>
 
-        </div>
-
-        <p className={Styles.quantity_text}>
-          Quantity*
-        </p>
-
-        <div className={Styles.quantity_box}>
-
-          <button>-</button>
-
-          <span>1</span>
-
-          <button>+</button>
-
-        </div>
-
-        <button className={Styles.cart_btn}
-          onClick={handleCart}>
-          Add To Cart
-        </button>
-        {/* 
-            <button className={Styles.buy_btn}>
-              Buy Now
-            </button> */}
-        <div className={Styles.buy_btn}>
-
-
-          <button style={{ color: 'white', fontSize: '20px' }} className="btn  " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Buy Now</button>
-
-          <div className="offcanvas offcanvas-top" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-            <div className="offcanvas-header" style={{ display: 'flex', justifyContent: 'center' }}>
-              <h1 id="offcanvasTopLabel">We can't accept online orders right now.</h1>
-      
-            </div>
-            <div className="offcanvas-body" style={{ display: 'flex', justifyContent: 'center' }}>
-              <h5>Please contact us to complete your purchase.</h5>
-            </div>
-
+            {singleProduct.delete && (
+              <span>{singleProduct.delete}</span>
+            )}
 
           </div>
 
-        </div>
+
+          <p>{singleProduct.description}</p>
 
 
-      </div>
+          {/* Quantity */}
 
-      {showCart && (
+          <div className={Styles["quantity"]}>
 
-        <div className={Styles.cart_sidebar}>
+            <span>Quantity</span>
 
-          <div className={Styles.cart_top}>
-
-            <h1>Cart ({cart.length})</h1>
 
             <button
-              onClick={() => setShowCart(false)}
+              onClick={() =>
+                setSelectedQuantity((quantity) =>
+                  Math.max(1, quantity - 1)
+                )
+              }
             >
-              X
+              -
+            </button>
+
+
+            <span>{selectedQuantity}</span>
+
+
+            <button
+              onClick={() =>
+                setSelectedQuantity(
+                  (quantity) => quantity + 1
+                )
+              }
+            >
+              +
             </button>
 
           </div>
 
-          {cart.map((item) => (
 
-            <div
-              key={item.id}
-              className={Styles.cart_item}
+          {/* Add To Cart */}
+
+          <button
+            className={Styles["add-to-cart"]}
+            onClick={handleCart}
+          >
+            Add To Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      {/* Cart Sidebar */}
+
+      {showCart && (
+
+        <div className={Styles["cart-sidebar"]}>
+
+          <div className={Styles["cart-header"]}>
+
+            <h2>Cart ({cart.length})</h2>
+
+
+            <button
+              onClick={() => setShowCart(false)}
             >
+              ×
+            </button>
 
-              <img
-                src={item.image}
-                alt=""
-              />
+          </div>
 
-              <div className={Styles.cart_details}>
 
-                <h3>{typeof item.content === "string" ? item.content : "Invalid Content"}</h3>
+          {cart.length === 0 ? (
 
-                <p>
+            <p>Your cart is empty</p>
 
-                  $
-                  {(
-                    parseFloat(item.price.replace("$", "")) *
-                    item.quantity
-                  ).toFixed(2)}
+          ) : (
 
-                </p>
+            <>
 
-                {/* QUANTITY */}
+              {cart.map((item) => (
 
-                <div className={Styles.cart_quantity}>
+                <div
+                  className={Styles["cart-item"]}
+                  key={item.id}
+                >
 
-                  {/* DECREASE */}
+                  <img
+                    src={item.image}
+                    alt={item.content}
+                  />
 
-                  <button
 
-                    onClick={() => {
-
-                      const updatedCart = cart.map((cartItem) =>
-
-                        cartItem.id === item.id
-
-                          ? {
-                            ...cartItem,
-                            quantity:
-                              cartItem.quantity > 1
-                                ? cartItem.quantity - 1
-                                : 1,
-                          }
-
-                          : cartItem
-                      );
-
-                      setCart(updatedCart);
-
-                    }}
+                  <div
+                    className={Styles["cart-item-details"]}
                   >
-                    -
-                  </button>
 
-                  <span>{item.quantity}</span>
+                    <h3>{item.content}</h3>
 
-                  {/* INCREASE */}
+                    <p>{item.price}</p>
 
-                  <button
 
-                    onClick={() => {
+                    {/* Cart Quantity */}
 
-                      const updatedCart = cart.map((cartItem) =>
+                    <div
+                      className={Styles["cart-quantity"]}
+                    >
 
-                        cartItem.id === item.id
+                      <button
+                        onClick={() =>
+                          updateQuantity(
+                            item.id,
+                            Math.max(
+                              1,
+                              item.quantity - 1
+                            )
+                          )
+                        }
+                      >
+                        -
+                      </button>
 
-                          ? {
-                            ...cartItem,
-                            quantity: cartItem.quantity + 1,
-                          }
 
-                          : cartItem
-                      );
+                      <span>{item.quantity}</span>
 
-                      setCart(updatedCart);
 
-                    }}
-                  >
-                    +
-                  </button>
+                      <button
+                        onClick={() =>
+                          updateQuantity(
+                            item.id,
+                            item.quantity + 1
+                          )
+                        }
+                      >
+                        +
+                      </button>
+
+                    </div>
+
+
+                    {/* Delete */}
+
+                    <button
+                      onClick={() =>
+                        deleteProduct(item.id)
+                      }
+                    >
+                      Delete
+                    </button>
+
+                  </div>
 
                 </div>
 
-                {/* DELETE BUTTON */}
+              ))}
 
-                <button
-                  className={Styles.delete_btn}
 
-                  onClick={() =>
-                    setCart(
-                      cart.filter(
-                        (cartItem) =>
-                          cartItem.id !== item.id
-                      )
-                    )
-                  }
-                >
-                  <MdDelete />
-                </button>
+              {/* Proceed Checkout */}
 
-              </div>
+              <button
+                className={
+                  Styles["place-order-button"]
+                }
+                onClick={() =>
+                  navigate("/checkout")
+                }
+              >
+                Proceed to Checkout
+              </button>
 
-            </div>
 
-          ))}
-          <div className={Styles.cart_total_section}>
+              {/* Clear Cart */}
 
-            <h2>
-              Total Products :
-              {" "}
-              {cart.length}
-            </h2>
+              <button onClick={clearCart}>
+                Clear Cart
+              </button>
 
-            <h2>
+            </>
 
-              Total Amount :
-              {" "}
-
-              $
-
-              {cart
-                .reduce(
-
-                  (total, item) =>
-
-                    total +
-                    parseFloat(
-                      item.price.replace("$", "")
-                    ) * item.quantity,
-
-                  0
-                )
-                .toFixed(2)}
-
-            </h2>
-
-          </div>
+          )}
 
         </div>
 
       )}
-    </div>
 
+    </div>
   );
 };
 

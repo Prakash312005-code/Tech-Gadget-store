@@ -1,0 +1,177 @@
+.tracking-page {
+  min-height: 100vh;
+  background: #f7f7f7;
+  padding: 40px 20px;
+}
+
+.tracking-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.tracking-container h1 {
+  margin-bottom: 5px;
+}
+
+.order-number {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.status-card,
+.items-card,
+.details-card,
+.total-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+}
+
+.status-card h2,
+.items-card h2,
+.details-card h2 {
+  margin-top: 0;
+}
+
+/* TRACKING */
+
+.tracking {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+.status-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  color: #aaa;
+}
+
+.status-circle {
+  width: 35px;
+  height: 35px;
+  margin: auto;
+
+  border-radius: 50%;
+
+  background: #ddd;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+}
+
+.status-step span {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.completed {
+  color: #111;
+}
+
+.completed .status-circle {
+  background: #111;
+  color: white;
+}
+
+.current-status {
+  text-align: center;
+  font-size: 16px;
+}
+
+/* ITEMS */
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item h3 {
+  margin: 0 0 5px;
+}
+
+.order-item p {
+  margin: 0;
+  color: #777;
+}
+
+/* DETAILS */
+
+.details-card p {
+  margin: 10px 0;
+}
+
+/* TOTAL */
+
+.total-card {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 20px;
+}
+
+.total-card strong {
+  font-size: 22px;
+}
+
+.loading {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .tracking {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .status-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .status-circle {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .status-step span {
+    margin: 0;
+  }
+
+  .order-item {
+    gap: 15px;
+  }
+}

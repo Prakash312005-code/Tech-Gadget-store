@@ -645,7 +645,44 @@ import mouse3 from '../assets/mou3.png'
   ]
 
 
+export const fetchProducts = async () => {
+  const response = await fetch(
+    "http://localhost:8080/api/products"
+  );
 
+  if (!response.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  const data = await response.json();
+
+  return data.map((product) => {
+
+    const localProduct = Productlist.find(
+      (item) => item.id === product.id
+    );
+
+    return {
+      ...product,
+
+      // Keep the same names your existing UI uses
+      content: product.name,
+
+      price: `$${Number(product.price).toFixed(2)}`,
+
+      delete:
+        product.oldPrice !== null &&
+        product.oldPrice !== undefined
+          ? `$${Number(product.oldPrice).toFixed(2)}`
+          : null,
+
+      // Keep your existing React image
+      image: localProduct
+        ? localProduct.image
+        : null,
+    };
+  });
+};
 
 
 
