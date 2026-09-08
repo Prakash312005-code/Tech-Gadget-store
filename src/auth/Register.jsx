@@ -2,19 +2,25 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Styles from "./Auth.module.css";
 
+const API_URL = "https://tech-ecommerce-production-e05c.up.railway.app";
+
 const Register = () => {
+
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   const handleRegister = async (e) => {
+
     e.preventDefault();
 
     try {
+
       const response = await fetch(
-        "http://localhost:8080/api/auth/register",
+        `${API_URL}/api/auth/register`,
         {
           method: "POST",
 
@@ -33,21 +39,29 @@ const Register = () => {
       const data = await response.text();
 
       if (response.ok) {
+
         alert(data);
 
         navigate("/login");
+
       } else {
+
         alert(data || "Registration failed");
+
       }
 
     } catch (error) {
+
       console.error("Registration error:", error);
 
       alert("Something went wrong");
+
     }
   };
 
+
   return (
+
     <div className={Styles["auth-page"]}>
 
       <div className={Styles["auth-card"]}>
@@ -74,6 +88,7 @@ const Register = () => {
 
           </div>
 
+
           <div className={Styles["input-group"]}>
 
             <label>Email</label>
@@ -87,6 +102,7 @@ const Register = () => {
             />
 
           </div>
+
 
           <div className={Styles["input-group"]}>
 
@@ -102,6 +118,7 @@ const Register = () => {
 
           </div>
 
+
           <button
             type="submit"
             className={Styles["auth-button"]}
@@ -111,12 +128,15 @@ const Register = () => {
 
         </form>
 
+
         <p className={Styles["auth-link"]}>
+
           Already have an account?
 
           <span onClick={() => navigate("/login")}>
             Login
           </span>
+
         </p>
 
       </div>

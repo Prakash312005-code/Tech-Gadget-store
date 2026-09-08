@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Styles from "./Auth.module.css";
 
+const API_URL = "https://tech-ecommerce-production-e05c.up.railway.app";
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -13,12 +15,14 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/auth/login",
+        `${API_URL}/api/auth/login`,
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
           },
+
           body: JSON.stringify({
             username: username,
             password: password,
@@ -29,22 +33,37 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok && data.token) {
+
+        // Save JWT token
         localStorage.setItem("token", data.token);
+
+        // Save username for cart
+        localStorage.setItem("username", username);
 
         alert("Login successful!");
 
         navigate("/");
+
       } else {
-        alert(data.message || "Invalid username or password");
+
+        alert(
+          data.message ||
+          "Invalid username or password"
+        );
+
       }
+
     } catch (error) {
+
       console.error("Login error:", error);
       alert("Something went wrong");
+
     }
   };
 
   return (
     <div className={Styles["auth-page"]}>
+
       <div className={Styles["auth-card"]}>
 
         <h1>Welcome Back</h1>
@@ -56,28 +75,38 @@ const Login = () => {
         <form onSubmit={handleLogin}>
 
           <div className={Styles["input-group"]}>
+
             <label>Username</label>
 
             <input
               type="text"
               placeholder="Enter your username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) =>
+                setUsername(e.target.value)
+              }
               required
             />
+
           </div>
 
+
           <div className={Styles["input-group"]}>
+
             <label>Password</label>
 
             <input
               type="password"
               placeholder="Enter your password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
               required
             />
+
           </div>
+
 
           <button
             type="submit"
@@ -88,15 +117,23 @@ const Login = () => {
 
         </form>
 
+
         <p className={Styles["auth-link"]}>
+
           Don't have an account?
 
-          <span onClick={() => navigate("/register")}>
+          <span
+            onClick={() =>
+              navigate("/register")
+            }
+          >
             Register
           </span>
+
         </p>
 
       </div>
+
     </div>
   );
 };
