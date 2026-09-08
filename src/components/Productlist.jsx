@@ -683,3 +683,4 @@ export const fetchProducts = async () => {
     };
   });
 };
+export default Productlist; 
