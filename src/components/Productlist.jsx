@@ -645,9 +645,11 @@ import mouse3 from '../assets/mou3.png'
   ]
 
 
+const API_URL = "https://tech-ecommerce-production-e05c.up.railway.app";
+
 export const fetchProducts = async () => {
   const response = await fetch(
-    "http://localhost:8080/api/products"
+    `${API_URL}/api/products`
   );
 
   if (!response.ok) {
@@ -665,7 +667,6 @@ export const fetchProducts = async () => {
     return {
       ...product,
 
-      // Keep the same names your existing UI uses
       content: product.name,
 
       price: `$${Number(product.price).toFixed(2)}`,
@@ -676,15 +677,9 @@ export const fetchProducts = async () => {
           ? `$${Number(product.oldPrice).toFixed(2)}`
           : null,
 
-      // Keep your existing React image
       image: localProduct
         ? localProduct.image
         : null,
     };
   });
 };
-
-
-
-
-export default Productlist;
