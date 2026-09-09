@@ -11,10 +11,14 @@ const OrderTracking = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
     const fetchOrder = async () => {
+
       try {
+
+        // Fetch Order Details
         const orderResponse = await fetch(
-          `http://localhost:8080/api/orders/details/${orderId}`
+          `https://tech-ecommerce-production-e05c.up.railway.app/api/orders/details/${orderId}`
         );
 
         if (!orderResponse.ok) {
@@ -22,10 +26,13 @@ const OrderTracking = () => {
         }
 
         const orderData = await orderResponse.json();
+
         setOrder(orderData);
 
+
+        // Fetch Order Items
         const itemsResponse = await fetch(
-          `http://localhost:8080/api/orders/details/${orderId}/items`
+          `https://tech-ecommerce-production-e05c.up.railway.app/api/orders/details/${orderId}/items`
         );
 
         if (!itemsResponse.ok) {
@@ -33,31 +40,47 @@ const OrderTracking = () => {
         }
 
         const itemsData = await itemsResponse.json();
+
         setItems(itemsData);
+
       } catch (error) {
+
         console.error("Error:", error);
+
       } finally {
+
         setLoading(false);
+
       }
+
     };
 
     fetchOrder();
+
   }, [orderId]);
 
+
   if (loading) {
-    return <div className={Styles["loading"]}>Loading order...</div>;
+    return (
+      <div className={Styles["loading"]}>
+        Loading order...
+      </div>
+    );
   }
+
 
   if (!order) {
     return (
       <div className={Styles["loading"]}>
         <h2>Order not found</h2>
+
         <button onClick={() => navigate("/")}>
           Go Home
         </button>
       </div>
     );
   }
+
 
   const statuses = [
     "PLACED",
@@ -69,6 +92,7 @@ const OrderTracking = () => {
   ];
 
   const currentStatus = statuses.indexOf(order.status);
+
 
   return (
     <div className={Styles["tracking-page"]}>
@@ -82,11 +106,14 @@ const OrderTracking = () => {
           ← Continue Shopping
         </button>
 
+
         <h1>Order Tracking</h1>
+
 
         <p className={Styles["order-number"]}>
           Order #{order.id}
         </p>
+
 
         {/* STATUS */}
         <div className={Styles["status-card"]}>
@@ -96,6 +123,7 @@ const OrderTracking = () => {
           <div className={Styles["tracking"]}>
 
             {statuses.map((status, index) => (
+
               <div
                 className={`${Styles["status-step"]} ${
                   index <= currentStatus
@@ -104,15 +132,19 @@ const OrderTracking = () => {
                 }`}
                 key={status}
               >
+
                 <div className={Styles["status-circle"]}>
                   {index <= currentStatus ? "✓" : ""}
                 </div>
 
                 <span>{status}</span>
+
               </div>
+
             ))}
 
           </div>
+
 
           <p className={Styles["current-status"]}>
             Current Status: <strong>{order.status}</strong>
@@ -120,31 +152,40 @@ const OrderTracking = () => {
 
         </div>
 
+
         {/* ORDER ITEMS */}
         <div className={Styles["items-card"]}>
 
           <h2>Ordered Products</h2>
 
           {items.map((item) => (
+
             <div
               className={Styles["order-item"]}
               key={item.id}
             >
+
               <div>
+
                 <h3>{item.productName}</h3>
 
                 <p>
                   Quantity: {item.quantity}
                 </p>
+
               </div>
+
 
               <strong>
                 ${(item.price * item.quantity).toFixed(2)}
               </strong>
+
             </div>
+
           ))}
 
         </div>
+
 
         {/* CUSTOMER DETAILS */}
         <div className={Styles["details-card"]}>
@@ -188,13 +229,16 @@ const OrderTracking = () => {
 
         </div>
 
+
         {/* TOTAL */}
         <div className={Styles["total-card"]}>
+
           <span>Total Amount</span>
 
           <strong>
             ${Number(order.totalAmount).toFixed(2)}
           </strong>
+
         </div>
 
       </div>

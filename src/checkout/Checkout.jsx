@@ -7,7 +7,7 @@ const Checkout = () => {
 
   const cartId = "test123";
 
-  // JWT Token 🔐
+  // JWT Token
   const token = localStorage.getItem("token");
 
   const [formData, setFormData] = useState({
@@ -55,13 +55,13 @@ const Checkout = () => {
       params.append("pincode", formData.pincode);
 
       const response = await fetch(
-        `http://localhost:8080/api/orders/${cartId}?${params.toString()}`,
+        `https://tech-ecommerce-production-e05c.up.railway.app/api/orders/${cartId}?${params.toString()}`,
         {
           method: "POST",
 
           headers: {
-            "Authorization": `Bearer ${token}`
-          }
+            "Authorization": `Bearer ${token}`,
+          },
         }
       );
 
@@ -81,15 +81,12 @@ const Checkout = () => {
       });
 
     } catch (error) {
-
       console.error(error);
 
       setError("Failed to place order. Please try again.");
 
     } finally {
-
       setLoading(false);
-
     }
   };
 
