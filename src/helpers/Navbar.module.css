@@ -323,7 +323,14 @@
 /* ================= SMALL MOBILE ================= */
 
 @media (max-width: 480px) {
+.icons {
+  gap: 10px;
+  font-size: 20px;
+}
 
+.navText span {
+  white-space: nowrap;
+}
   .navbar {
     padding: 12px 10px;
   }
