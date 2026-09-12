@@ -72,4 +72,131 @@ padding: 50px;
      color: black;
      padding: 50px;
   margin-left: 20px;
+}/* =====================================
+   TABLET - 900px
+===================================== */
+
+@media (max-width: 900px) {
+
+  .section {
+    gap: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .top_section,
+  .mid_section,
+  .bottom_section {
+    width: 100%;
+    height: 45vh;
+  }
+
+  .top_section p,
+  .mid_section p,
+  .bottom_section p {
+    font-size: 16px;
+    padding: 35px;
+  }
+
+  .top_section h1,
+  .mid_section h1,
+  .bottom_section h1 {
+    margin-left: 35px;
+    font-size: 28px;
+  }
+
+  .top_section h5,
+  .mid_section h5,
+  .bottom_section h5 {
+    padding: 35px;
+    margin-left: 15px;
+  }
+
+}
+
+
+/* =====================================
+   MOBILE - 650px
+===================================== */
+
+@media (max-width: 650px) {
+
+  .section {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .top_section,
+  .mid_section,
+  .bottom_section {
+    width: 100%;
+    height: 400px;
+    box-sizing: border-box;
+  }
+
+  .top_section p,
+  .mid_section p,
+  .bottom_section p {
+    font-size: 16px;
+    padding: 25px;
+  }
+
+  .top_section h1,
+  .mid_section h1,
+  .bottom_section h1 {
+    margin-left: 25px;
+    font-size: 26px;
+  }
+
+  .top_section h5,
+  .mid_section h5,
+  .bottom_section h5 {
+    padding: 25px;
+    margin-left: 0;
+    font-size: 15px;
+  }
+
+}
+
+
+/* =====================================
+   SMALL MOBILE - 400px
+===================================== */
+
+@media (max-width: 400px) {
+
+  .section {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .top_section,
+  .mid_section,
+  .bottom_section {
+    height: 330px;
+  }
+
+  .top_section p,
+  .mid_section p,
+  .bottom_section p {
+    font-size: 14px;
+    padding: 20px;
+  }
+
+  .top_section h1,
+  .mid_section h1,
+  .bottom_section h1 {
+    margin-left: 20px;
+    font-size: 22px;
+  }
+
+  .top_section h5,
+  .mid_section h5,
+  .bottom_section h5 {
+    padding: 20px;
+    font-size: 13px;
+  }
+
 }

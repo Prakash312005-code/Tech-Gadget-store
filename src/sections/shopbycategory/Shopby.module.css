@@ -1,41 +1,127 @@
-.shopname p{
-         display: flex;
-    justify-content: center;
-    font-size: 40px;
-    font-weight: 600;
-    padding: 10px;
-    font-family: sans-serif;
+.shopname p {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 600;
+  padding: 10px;
+  font-family: sans-serif;
+  text-align: center;
 }
 
- .shopmain{
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 10px;
-    background-color: white;
-    
- }
- 
-
-
-.shopone img{
-    width: 220px;
-    transition: transform 0.4s ease;
+.shopmain {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 10px;
+  background-color: white;
+  flex-wrap: wrap;
 }
 
-.shopone img:hover{
-    transform: scale(1.1);
+.shopone {
+  border: 5px solid whitesmoke;
+  padding: 55px;
+  border-radius: 300px;
 }
- .shopone{
-     border: 5px solid whitesmoke;
-      padding: 55px;  
-    border-radius: 300px;
-    
- }
- .itemname {
-    display: flex;   
-    justify-content: center;
-    align-items: center;
-    font-size: 17px;
-    font-weight: 500;
- }
+
+.shopone img {
+  width: 220px;
+  max-width: 100%;
+  transition: transform 0.4s ease;
+}
+
+.shopone img:hover {
+  transform: scale(1.1);
+}
+
+.itemname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+/* ================================
+   TABLET RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+  .shopname p {
+    font-size: 32px;
+  }
+
+  .shopmain {
+    gap: 25px;
+    padding: 20px;
+  }
+
+  .shopone {
+    padding: 40px;
+  }
+
+  .shopone img {
+    width: 180px;
+  }
+
+}
+
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+
+  .shopname p {
+    font-size: 26px;
+    padding: 15px;
+  }
+
+  .shopmain {
+    gap: 20px;
+    padding: 15px;
+  }
+
+  .shopone {
+    padding: 30px;
+    border-width: 4px;
+  }
+
+  .shopone img {
+    width: 140px;
+  }
+
+  .itemname {
+    font-size: 15px;
+    margin-top: 8px;
+  }
+
+}
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 400px) {
+
+  .shopname p {
+    font-size: 22px;
+  }
+
+  .shopmain {
+    gap: 15px;
+  }
+
+  .shopone {
+    padding: 20px;
+  }
+
+  .shopone img {
+    width: 120px;
+  }
+
+}

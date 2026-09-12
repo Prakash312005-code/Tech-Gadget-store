@@ -25,3 +25,83 @@
  
   width:400px;
 }
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .home {
+    padding: 20px;
+  }
+
+  .homefourth {
+    flex-direction: column;
+  }
+
+  .fourthcontent {
+    width: 100%;
+    height: 55vh;
+  }
+
+  .fourthcontext {
+    width: auto;
+    margin: 20px;
+    padding: 30px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .home {
+    padding: 10px;
+  }
+
+  .homefourth {
+    flex-direction: column;
+  }
+
+  .fourthcontent {
+    width: 100%;
+    height: 350px;
+
+    /* Remove angled shape on mobile */
+    clip-path: none;
+  }
+
+  .fourthcontext {
+    width: auto;
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .home {
+    padding: 5px;
+  }
+
+  .fourthcontent {
+    height: 280px;
+  }
+
+  .fourthcontext {
+    margin: 5px;
+    padding: 15px;
+  }
+
+}

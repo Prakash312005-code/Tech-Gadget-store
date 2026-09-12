@@ -24,3 +24,79 @@ overflow: hidden;
 height: 85vh;
  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
 }
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .homesection {
+    height: auto;
+    padding: 20px;
+  }
+
+  .Homefifth {
+    flex-direction: column;
+  }
+
+  .fifthcontent {
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .fifthcontext {
+    width: 100%;
+    height: 60vh;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .homesection {
+    height: auto;
+    padding: 10px;
+  }
+
+  .Homefifth {
+    flex-direction: column;
+  }
+
+  .fifthcontent {
+    width: 100%;
+    padding: 25px 20px;
+    box-sizing: border-box;
+  }
+
+  .fifthcontext {
+    width: 100%;
+    height: 400px;
+
+    /* Remove angled shape on mobile */
+    clip-path: none;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .fifthcontent {
+    padding: 20px 15px;
+  }
+
+  .fifthcontext {
+    height: 300px;
+  }
+
+}

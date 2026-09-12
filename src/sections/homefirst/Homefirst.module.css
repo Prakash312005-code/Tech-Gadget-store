@@ -36,3 +36,102 @@ padding: 100px;
   font-size: 22px;
   color: #555;
 }
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .top_section {
+    height: 70vh;
+    padding: 60px;
+    box-sizing: border-box;
+  }
+
+  .banner_content {
+    max-width: 450px;
+  }
+
+  .small_text {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .banner_title {
+    font-size: 45px;
+    line-height: 55px;
+  }
+
+  .banner_bottom {
+    font-size: 20px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .top_section {
+    height: 65vh;
+    min-height: 500px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    align-items: center;
+    background-position: center;
+  }
+
+  .banner_content {
+    max-width: 100%;
+  }
+
+  .small_text {
+    font-size: 15px;
+    padding: 5px 8px;
+    margin-bottom: 15px;
+  }
+
+  .banner_title {
+    font-size: 36px;
+    line-height: 44px;
+    margin-bottom: 15px;
+  }
+
+  .banner_bottom {
+    font-size: 17px;
+    line-height: 26px;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .top_section {
+    height: 60vh;
+    min-height: 450px;
+    padding: 20px 15px;
+  }
+
+  .small_text {
+    font-size: 13px;
+  }
+
+  .banner_title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .banner_bottom {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+}

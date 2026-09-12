@@ -3,21 +3,20 @@
   flex-direction: row;
   justify-content: space-evenly;
   padding: 30px;
-  background-color:whitesmoke;
+  background-color: whitesmoke;
   height: auto;
   width: 100%;
   gap: 20px;
+  box-sizing: border-box;
 }
+
 .headimage {
   background-repeat: no-repeat;
-  /* height: 500px; */
-  /* width: 80vh; */
   border-radius: 20px;
 }
+
 .headcontext {
   background-repeat: no-repeat;
-  /* height: 500px; */
-  /* width: 80vh;   */
   border-radius: 20px;
 }
 
@@ -25,7 +24,76 @@
   color: white;
   padding: 70px;
 }
+
 .context {
   color: white;
   padding: 70px;
+}
+
+
+/* ================================
+   TABLET RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+  .headtext {
+    padding: 25px;
+    gap: 15px;
+  }
+
+  .headcontent {
+    padding: 45px;
+  }
+
+  .context {
+    padding: 45px;
+  }
+
+}
+
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+
+  .headtext {
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .headimage,
+  .headcontext {
+    width: 100%;
+  }
+
+  .headcontent {
+    padding: 35px 25px;
+  }
+
+  .context {
+    padding: 35px 25px;
+  }
+
+}
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 400px) {
+
+  .headtext {
+    padding: 10px;
+  }
+
+  .headcontent,
+  .context {
+    padding: 25px 15px;
+  }
+
 }
