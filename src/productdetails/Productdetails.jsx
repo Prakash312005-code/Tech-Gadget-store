@@ -5,7 +5,12 @@ import Products from "../components/Productlist";
 
 const API_URL = "https://tech-ecommerce-production-e05c.up.railway.app";
 
-const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
+const Productdetails = ({
+  cart,
+  setCart,
+  showCart,
+  setShowCart,
+}) => {
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -13,6 +18,9 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
   const [singleProduct, setSingleProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+  // Product added success message
+  const [cartMessage, setCartMessage] = useState(false);
 
   // JWT Token
   const token = localStorage.getItem("token");
@@ -58,7 +66,10 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
 
       } catch (error) {
 
-        console.error("Error fetching product:", error);
+        console.error(
+          "Error fetching product:",
+          error
+        );
 
       } finally {
 
@@ -88,8 +99,8 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
         `${API_URL}/api/cart`,
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -102,19 +113,26 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
       const formattedCart = data.map((item) => {
 
         const localProduct = Products.find(
-          (product) => product.id === item.product.id
+          (product) =>
+            product.id === item.product.id
         );
 
         return {
           id: item.product.id,
           content: item.product.name,
-          price: `$${Number(item.product.price).toFixed(2)}`,
+          price: `$${Number(
+            item.product.price
+          ).toFixed(2)}`,
           delete:
             item.product.oldPrice !== null &&
             item.product.oldPrice !== undefined
-              ? `$${Number(item.product.oldPrice).toFixed(2)}`
+              ? `$${Number(
+                  item.product.oldPrice
+                ).toFixed(2)}`
               : null,
-          image: localProduct ? localProduct.image : null,
+          image: localProduct
+            ? localProduct.image
+            : null,
           quantity: item.quantity,
           category: item.product.category,
           sale: item.product.sale,
@@ -126,7 +144,10 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
 
     } catch (error) {
 
-      console.error("Error loading cart:", error);
+      console.error(
+        "Error loading cart:",
+        error
+      );
 
     }
 
@@ -148,6 +169,8 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
 
     if (!singleProduct) return;
 
+
+    // Check login
     if (!token) {
 
       alert("Please login first");
@@ -157,6 +180,7 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
       return;
     }
 
+
     try {
 
       const response = await fetch(
@@ -165,26 +189,47 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
           method: "POST",
 
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
       if (!response.ok) {
-        throw new Error("Failed to add product to cart");
+        throw new Error(
+          "Failed to add product to cart"
+        );
       }
 
+
+      // Reload cart
       await loadCart();
 
-      setShowCart(true);
+
+      // Show success message
+      setCartMessage(true);
+
 
     } catch (error) {
 
-      console.error("Error adding product to cart:", error);
+      console.error(
+        "Error adding product to cart:",
+        error
+      );
 
       alert("Failed to add product to cart");
 
     }
+
+  };
+
+
+  // ================= OPEN CART =================
+
+  const handleViewCart = () => {
+
+    setShowCart(true);
+
+    setCartMessage(false);
 
   };
 
@@ -204,13 +249,15 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
           method: "PUT",
 
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
       if (!response.ok) {
-        throw new Error("Failed to update quantity");
+        throw new Error(
+          "Failed to update quantity"
+        );
       }
 
       await loadCart();
@@ -241,8 +288,8 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
           method: "DELETE",
 
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -278,8 +325,8 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
           method: "DELETE",
 
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -306,11 +353,26 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
   // ================= LOADING =================
 
   if (loading) {
-    return <div>Loading...</div>;
+
+    return (
+      <div>
+        Loading...
+      </div>
+    );
+
   }
 
+
+  // ================= PRODUCT NOT FOUND =================
+
   if (!singleProduct) {
-    return <div>Product not found</div>;
+
+    return (
+      <div>
+        Product not found
+      </div>
+    );
+
   }
 
 
@@ -318,16 +380,36 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
 
   return (
 
-    <div className={Styles["product-details-page"]}>
+    <div
+      className={
+        Styles["product-details-page"]
+      }
+    >
 
-      <button onClick={() => navigate(-1)}>
+      {/* BACK BUTTON */}
+
+      <button
+        onClick={() => navigate(-1)}
+      >
         ← Back
       </button>
 
 
-      <div className={Styles["product-details"]}>
+      {/* PRODUCT DETAILS */}
 
-        <div className={Styles["product-image"]}>
+      <div
+        className={
+          Styles["product-details"]
+        }
+      >
+
+        {/* PRODUCT IMAGE */}
+
+        <div
+          className={
+            Styles["product-image"]
+          }
+        >
 
           <img
             src={singleProduct.image}
@@ -337,47 +419,91 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
         </div>
 
 
-        <div className={Styles["product-info"]}>
+        {/* PRODUCT INFO */}
 
-          <h1>{singleProduct.content}</h1>
+        <div
+          className={
+            Styles["product-info"]
+          }
+        >
+
+          <h1>
+            {singleProduct.content}
+          </h1>
 
 
-          <div className={Styles["product-price"]}>
+          {/* PRICE */}
+
+          <div
+            className={
+              Styles["product-price"]
+            }
+          >
 
             {singleProduct.price}
 
             {singleProduct.delete && (
-              <span>{singleProduct.delete}</span>
+
+              <span>
+                {singleProduct.delete}
+              </span>
+
             )}
 
           </div>
 
 
-          <p>{singleProduct.description}</p>
+          {/* DESCRIPTION */}
+
+          <p>
+            {singleProduct.description}
+          </p>
 
 
           {/* QUANTITY */}
 
-          <div className={Styles["quantity"]}>
+          <div
+            className={
+              Styles["quantity"]
+            }
+          >
 
-            <span>Quantity</span>
+            <span>
+              Quantity
+            </span>
+
+
+            {/* MINUS */}
 
             <button
               onClick={() =>
-                setSelectedQuantity((quantity) =>
-                  Math.max(1, quantity - 1)
+                setSelectedQuantity(
+                  (quantity) =>
+                    Math.max(
+                      1,
+                      quantity - 1
+                    )
                 )
               }
             >
               -
             </button>
 
-            <span>{selectedQuantity}</span>
+
+            {/* QUANTITY */}
+
+            <span>
+              {selectedQuantity}
+            </span>
+
+
+            {/* PLUS */}
 
             <button
               onClick={() =>
                 setSelectedQuantity(
-                  (quantity) => quantity + 1
+                  (quantity) =>
+                    quantity + 1
                 )
               }
             >
@@ -390,31 +516,76 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
           {/* ADD TO CART */}
 
           <button
-            className={Styles["add-to-cart"]}
+            className={
+              Styles["add-to-cart"]
+            }
             onClick={handleCart}
           >
             Add To Cart
           </button>
+
+
+          {/* SUCCESS MESSAGE */}
+
+          {cartMessage && (
+
+            <div
+              className={
+                Styles["cart-success-message"]
+              }
+            >
+
+              <p>
+                ✅ Product added to cart!
+              </p>
+
+
+              <button
+                className={
+                  Styles["view-cart-button"]
+                }
+                onClick={handleViewCart}
+              >
+                View Cart 🛒
+              </button>
+
+            </div>
+
+          )}
 
         </div>
 
       </div>
 
 
-      {/* CART SIDEBAR */}
+      {/* ================= CART SIDEBAR ================= */}
 
       {showCart && (
 
-        <div className={Styles["cart-sidebar"]}>
+        <div
+          className={
+            Styles["cart-sidebar"]
+          }
+        >
 
-          <div className={Styles["cart-header"]}>
+
+          {/* CART HEADER */}
+
+          <div
+            className={
+              Styles["cart-header"]
+            }
+          >
 
             <h2>
               Cart ({cart.length})
             </h2>
 
+
             <button
-              onClick={() => setShowCart(false)}
+              onClick={() =>
+                setShowCart(false)
+              }
             >
               ×
             </button>
@@ -422,18 +593,27 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
           </div>
 
 
+          {/* EMPTY CART */}
+
           {cart.length === 0 ? (
 
-            <p>Your cart is empty</p>
+            <p>
+              Your cart is empty
+            </p>
 
           ) : (
 
             <>
 
+
+              {/* CART ITEMS */}
+
               {cart.map((item) => (
 
                 <div
-                  className={Styles["cart-item"]}
+                  className={
+                    Styles["cart-item"]
+                  }
                   key={item.id}
                 >
 
@@ -442,24 +622,36 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
                     alt={item.content}
                   />
 
+
                   <div
                     className={
-                      Styles["cart-item-details"]
+                      Styles[
+                        "cart-item-details"
+                      ]
                     }
                   >
 
-                    <h3>{item.content}</h3>
+                    <h3>
+                      {item.content}
+                    </h3>
 
-                    <p>{item.price}</p>
+
+                    <p>
+                      {item.price}
+                    </p>
 
 
                     {/* QUANTITY */}
 
                     <div
                       className={
-                        Styles["cart-quantity"]
+                        Styles[
+                          "cart-quantity"
+                        ]
                       }
                     >
+
+                      {/* MINUS */}
 
                       <button
                         onClick={() =>
@@ -475,7 +667,13 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
                         -
                       </button>
 
-                      <span>{item.quantity}</span>
+
+                      <span>
+                        {item.quantity}
+                      </span>
+
+
+                      {/* PLUS */}
 
                       <button
                         onClick={() =>
@@ -508,9 +706,13 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
               ))}
 
 
+              {/* CHECKOUT */}
+
               <button
                 className={
-                  Styles["place-order-button"]
+                  Styles[
+                    "place-order-button"
+                  ]
                 }
                 onClick={() =>
                   navigate("/checkout")
@@ -520,7 +722,11 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
               </button>
 
 
-              <button onClick={clearCart}>
+              {/* CLEAR CART */}
+
+              <button
+                onClick={clearCart}
+              >
                 Clear Cart
               </button>
 
@@ -533,7 +739,9 @@ const Productdetails = ({ cart, setCart, showCart, setShowCart }) => {
       )}
 
     </div>
+
   );
+
 };
 
 export default Productdetails;

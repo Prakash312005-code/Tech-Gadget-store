@@ -449,7 +449,40 @@
 
   transition: all 0.25s ease;
 }
+.cart-success-message {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 10px;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  background-color: #f5f5f5;
+}
+
+.cart-success-message p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.view-cart-button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.view-cart-button:hover {
+  opacity: 0.8;
+}
 .place-order-button:hover {
   background: #333;
   transform: translateY(-1px);

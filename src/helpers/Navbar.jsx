@@ -1,90 +1,188 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { MdAccountCircle } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import Styles from '../helpers/Navbar.module.css'
+import Styles from "../helpers/Navbar.module.css";
+
 const Navbar = ({
   cart,
   setShowCart,
 }) => {
-  const navigate = useNavigate( );
+
+  const navigate = useNavigate();
+
+  const [showAccountMenu, setShowAccountMenu] =
+    useState(false);
+
+  const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+
+    setShowAccountMenu(false);
+
+    navigate("/");
+  };
+
+
   return (
-    <div style={{
-  //  border  :'1px solid red',
-        height : '100px',
-          fontSize: "50px",
-          fontWeight: "600",
-      
-          display: "flex",
-       
-          justifyContent: "space-between",
-          alignItems : 'center',
-          padding: "40px", 
-        }}
-          >
 
-<p
-        style={{
-    //  border  :'1px solid red',
-          fontSize: "50px",
-          fontWeight: "600",
-          padding: "10px",
-       
-        }}
-        
+    <div className={Styles.navbar}>
+
+      {/* LOGO */}
+
+      <div
+        className={Styles.logo}
+        onClick={() => navigate("/")}
       >
-        TechShed   </p>
-        <p   className={Styles.nav_text}
-        style={{
-      // border  :'1px solid red',
-        
-          backgroundColor: "whitesmoke",
-          borderRadius : '30px',
-          color : 'black',
-          height: "50px", 
-          padding : "10px", 
-          margin :'10px', 
-          display: "flex",
-          gap: "40px",
-          fontSize: "20px",
-          
-           
-        }}
-      >
-        
-        <p onClick={() => navigate("/about")}  >ABOUT  </p>
-        <p onClick={() => navigate("/allproduct")}> PRODUCTS</p>
-        <p onClick={() => navigate("/")}> SHOP</p>
-        <p onClick={() => navigate("/helpcenter")}>HELP CENTER</p>
-        
-      </p> 
-        <p
-          style={{
-          //  border  :'1px solid red',
-            color : 'black',
-            fontSize: "30px",
-            padding  : "10px",  
-            display: "flex",
-            gap: "60px",
-             margin :'10px',
-          }}
+        TechShed
+      </div>
+
+
+      {/* NAVIGATION */}
+
+      <div className={Styles.navText}>
+
+        <span onClick={() => navigate("/about")}>
+          ABOUT
+        </span>
+
+        <span onClick={() => navigate("/allproduct")}>
+          PRODUCTS
+        </span>
+
+        <span onClick={() => navigate("/")}>
+          SHOP
+        </span>
+
+        <span onClick={() => navigate("/helpcenter")}>
+          HELP CENTER
+        </span>
+
+      </div>
+
+
+      {/* ICONS */}
+
+      <div className={Styles.icons}>
+
+        <CiSearch />
+
+        {/* ACCOUNT */}
+
+        <div className={Styles.accountContainer}>
+
+          <MdAccountCircle
+            className={Styles.icon}
+            onClick={() =>
+              setShowAccountMenu(
+                !showAccountMenu
+              )
+            }
+          />
+
+
+          {showAccountMenu && (
+
+            <div
+              className={
+                Styles.accountMenu
+              }
+            >
+
+              {!token ? (
+
+                <>
+
+                  <button
+                    onClick={() => {
+                      navigate("/login");
+                      setShowAccountMenu(false);
+                    }}
+                  >
+                    Login
+                  </button>
+
+
+                  <button
+                    onClick={() => {
+                      navigate("/register");
+                      setShowAccountMenu(false);
+                    }}
+                  >
+                    Register
+                  </button>
+
+                </>
+
+              ) : (
+
+                <>
+
+                  <p>
+                    Hello, {username}
+                  </p>
+
+                  <button
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+
+                </>
+
+              )}
+
+            </div>
+
+          )}
+
+        </div>
+
+
+        <CiHeart />
+
+
+        {/* CART */}
+
+        <div
+          className={Styles.cartContainer}
         >
-          <CiSearch />
-          <MdAccountCircle />
-          <CiHeart />
-        <FaCartShopping
-  onClick={() => setShowCart(true)}
-  
-/>
-        </p>
 
-      
+          <FaCartShopping
+            className={Styles.icon}
+            onClick={() =>
+              setShowCart(true)
+            }
+          />
 
- 
+          {/* CART COUNT */}
+
+          {cart && cart.length > 0 && (
+
+            <span
+              className={
+                Styles.cartCount
+              }
+            >
+              {cart.length}
+            </span>
+
+          )}
+
+        </div>
+
+      </div>
+
     </div>
+
   );
+
 };
 
 export default Navbar;
