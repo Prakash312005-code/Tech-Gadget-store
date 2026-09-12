@@ -40,7 +40,7 @@ const Navbar = ({
         className={Styles.logo}
         onClick={() => navigate("/")}
       >
-        TechShed
+        Techvora
       </div>
 
 
