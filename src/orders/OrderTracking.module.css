@@ -149,29 +149,171 @@
 }
 
 /* MOBILE */
+/* ================= TABLET ================= */
+
+@media (max-width: 768px) {
+
+  .tracking-page {
+    padding: 30px 15px;
+  }
+
+  .status-card,
+  .items-card,
+  .details-card,
+  .total-card {
+    padding: 20px;
+  }
+
+  .tracking {
+    margin: 30px 0;
+  }
+
+  .status-step span {
+    font-size: 10px;
+  }
+
+}
+
+
+/* ================= MOBILE ================= */
 
 @media (max-width: 650px) {
+
+  .tracking-page {
+    padding: 20px 12px;
+  }
+
+  .tracking-container h1 {
+    font-size: 26px;
+  }
+
+  .order-number {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .status-card,
+  .items-card,
+  .details-card,
+  .total-card {
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+
+  /* Vertical Order Tracking */
+
   .tracking {
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
+    gap: 18px;
+    margin: 25px 0;
   }
 
   .status-step {
+    width: 100%;
+    flex: none;
+
     display: flex;
     align-items: center;
+
+    text-align: left;
+
     gap: 12px;
   }
 
   .status-circle {
     margin: 0;
+
+    width: 32px;
+    height: 32px;
+
     flex-shrink: 0;
   }
 
   .status-step span {
     margin: 0;
+
+    font-size: 14px;
   }
+
+
+  /* Order Items */
 
   .order-item {
     gap: 15px;
+    padding: 15px 0;
   }
+
+  .order-item h3 {
+    font-size: 16px;
+  }
+
+  .order-item p {
+    font-size: 14px;
+  }
+
+  .order-item strong {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+
+  /* Customer Details */
+
+  .details-card p {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+
+  /* Total */
+
+  .total-card {
+    font-size: 17px;
+  }
+
+  .total-card strong {
+    font-size: 19px;
+  }
+
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 380px) {
+
+  .tracking-page {
+    padding: 15px 8px;
+  }
+
+  .status-card,
+  .items-card,
+  .details-card,
+  .total-card {
+    padding: 15px;
+  }
+
+  .tracking-container h1 {
+    font-size: 23px;
+  }
+
+  .status-step span {
+    font-size: 13px;
+  }
+
+  .order-item h3 {
+    font-size: 14px;
+  }
+
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .total-card {
+    font-size: 15px;
+  }
+
 }

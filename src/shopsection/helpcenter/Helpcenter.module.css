@@ -14,3 +14,72 @@
      font-size: 20px;
     font-weight: 500;
 }
+/* ===============================
+   TABLET
+================================ */
+
+@media (max-width: 768px) {
+
+  .centername {
+    font-size: 38px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .centertwo {
+    padding: 60px 40px;
+    font-size: 22px;
+  }
+
+  .generalname {
+    font-size: 19px;
+  }
+
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+  .centername {
+    font-size: 30px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .centertwo {
+    padding: 40px 20px;
+    font-size: 18px;
+  }
+
+  .generalname {
+    font-size: 17px;
+  }
+
+}
+
+
+/* ===============================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 400px) {
+
+  .centername {
+    font-size: 26px;
+    padding: 12px;
+  }
+
+  .centertwo {
+    padding: 30px 15px;
+    font-size: 16px;
+  }
+
+  .generalname {
+    font-size: 16px;
+  }
+
+}

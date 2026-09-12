@@ -131,21 +131,97 @@
   color: #d32f2f;
   font-size: 14px;
 }
+/* ================= TABLET ================= */
+
+@media (max-width: 768px) {
+
+  .checkout-page {
+    padding: 35px 18px;
+  }
+
+  .checkout-container {
+    max-width: 600px;
+    padding: 30px;
+  }
+
+  .checkout-header {
+    margin-bottom: 28px;
+  }
+
+  .checkout-header h1 {
+    font-size: 30px;
+  }
+
+}
+
+
+/* ================= MOBILE ================= */
 
 @media (max-width: 600px) {
+
   .checkout-page {
     padding: 20px 12px;
   }
 
   .checkout-container {
     padding: 25px 20px;
+    border-radius: 10px;
+  }
+
+  .checkout-header {
+    margin-bottom: 25px;
+  }
+
+  .checkout-header button {
+    margin-bottom: 20px;
+    font-size: 15px;
   }
 
   .checkout-header h1 {
     font-size: 27px;
   }
 
+  .checkout-header p {
+    font-size: 14px;
+  }
+
+  .checkout-form {
+    gap: 16px;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .place-order-button {
+    height: 50px;
+    font-size: 15px;
+  }
+
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 380px) {
+
+  .checkout-page {
+    padding: 15px 8px;
+  }
+
+  .checkout-container {
+    padding: 20px 15px;
+  }
+
+  .checkout-header h1 {
+    font-size: 24px;
+  }
+
 }

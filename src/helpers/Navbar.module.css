@@ -1,48 +1,75 @@
+/* ================= NAVBAR ================= */
+
 .navbar {
   height: 100px;
+
   font-size: 50px;
   font-weight: 600;
 
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   padding: 40px;
+
+  box-sizing: border-box;
 }
+
+
+/* ================= LOGO ================= */
 
 .logo {
   font-size: 50px;
+
   font-weight: 600;
+
   padding: 10px;
+
   cursor: pointer;
+
+  white-space: nowrap;
 }
+
+
+/* ================= NAVIGATION ================= */
 
 .navText {
   background-color: whitesmoke;
+
   border-radius: 30px;
 
   color: black;
 
-  height: 50px;
+  min-height: 50px;
 
-  padding: 10px;
+  padding: 10px 20px;
+
   margin: 10px;
 
   display: flex;
+
   gap: 40px;
 
   font-size: 20px;
 
   align-items: center;
+
 }
 
 .navText span {
   cursor: pointer;
+
+  white-space: nowrap;
 }
 
 .navText span:hover {
   opacity: 0.6;
 }
+
+
+/* ================= ICONS ================= */
 
 .icons {
   color: black;
@@ -52,29 +79,35 @@
   padding: 10px;
 
   display: flex;
+
   gap: 40px;
 
   margin: 10px;
 
   align-items: center;
+
 }
 
 .icon {
   cursor: pointer;
 }
 
+
+/* ================= ACCOUNT MENU ================= */
+
 .accountContainer {
   position: relative;
 
   display: flex;
+
   align-items: center;
 }
 
 .accountMenu {
-
   position: absolute;
 
   top: 45px;
+
   right: 0;
 
   width: 160px;
@@ -86,6 +119,7 @@
   padding: 15px;
 
   display: flex;
+
   flex-direction: column;
 
   gap: 10px;
@@ -101,11 +135,11 @@
 
 .accountMenu p {
   margin: 0;
+
   font-size: 15px;
 }
 
 .accountMenu button {
-
   border: none;
 
   padding: 10px;
@@ -124,25 +158,27 @@
 }
 
 
-.cartContainer {
+/* ================= CART ================= */
 
+.cartContainer {
   position: relative;
 
   cursor: pointer;
 
   display: flex;
+
   align-items: center;
 }
 
-
 .cartCount {
-
   position: absolute;
 
   top: -10px;
+
   right: -12px;
 
   width: 20px;
+
   height: 20px;
 
   border-radius: 50%;
@@ -158,4 +194,170 @@
   align-items: center;
 
   justify-content: center;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+
+  .navbar {
+    height: auto;
+
+    padding: 20px;
+
+    gap: 15px;
+  }
+
+  .logo {
+    font-size: 35px;
+
+    padding: 5px;
+  }
+
+  .navText {
+    gap: 20px;
+
+    padding: 8px 15px;
+
+    font-size: 16px;
+  }
+
+  .icons {
+    font-size: 26px;
+
+    gap: 25px;
+
+    padding: 5px;
+
+    margin: 5px;
+  }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    height: auto;
+
+    padding: 15px;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+
+  /* Logo */
+
+  .logo {
+    font-size: 30px;
+
+    padding: 0;
+  }
+
+
+  /* Icons */
+
+  .icons {
+    font-size: 25px;
+
+    gap: 18px;
+
+    padding: 0;
+
+    margin: 0;
+  }
+
+
+  /* Navigation moves below */
+
+  .navText {
+    order: 3;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    justify-content: space-around;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    margin: 5px 0 0 0;
+
+    font-size: 14px;
+
+    border-radius: 15px;
+  }
+
+
+  .accountMenu {
+    top: 38px;
+
+    width: 150px;
+
+    padding: 12px;
+  }
+
+
+  .cartCount {
+    width: 18px;
+
+    height: 18px;
+
+    font-size: 10px;
+
+    top: -8px;
+
+    right: -10px;
+  }
+
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 12px 10px;
+  }
+
+
+  .logo {
+    font-size: 25px;
+  }
+
+
+  .icons {
+    font-size: 22px;
+
+    gap: 12px;
+  }
+
+
+  .navText {
+    font-size: 11px;
+
+    gap: 5px;
+
+    padding: 10px 5px;
+
+    border-radius: 12px;
+
+    overflow-x: auto;
+  }
+
+
+  .accountMenu {
+    width: 140px;
+
+    right: -10px;
+  }
+
 }
