@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# Tech Gadget Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack e-commerce web application for browsing technology products and managing a shopping experience. Built with React on the frontend and Java Spring Boot with MySQL on the backend.
 
-## Available Scripts
+## Live Demo
 
-In the project directory, you can run:
+- **Frontend:** https://tech-gadget-store-9kt8.vercel.app
+- **Backend API:** https://tech-ecommerce-production-e05c.up.railway.app/api/products/bulk
 
-### `npm start`
+> The backend API URL above is a bulk-products endpoint. Use the frontend demo for the complete user experience.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Browse and view technology products
+- Product details pages
+- Shopping cart and quantity management
+- Wishlist
+- User registration and login with JWT authentication
+- Order placement and order tracking
+- REST API integration between React and Spring Boot
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+- React
+- JavaScript
+- HTML5 and CSS3
+- React Router
+- React Icons
 
-### `npm run build`
+### Backend
+- Java
+- Spring Boot
+- Spring Data JPA / Hibernate
+- Spring Security
+- JWT authentication
+- REST APIs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Database and Deployment
+- MySQL
+- Vercel (frontend)
+- Railway (backend)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Run Locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js and npm
+- Java and Maven
+- MySQL
 
-### `npm run eject`
+### 1. Clone the repository
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone https://github.com/Prakash312005-code/Tech-Gadget-store.git
+cd Tech-Gadget-store
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. Install frontend dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Configure the backend
 
-## Learn More
+The Spring Boot backend is maintained/deployed separately. Configure your backend's database connection and JWT settings in its application configuration, and start the backend before using authenticated features.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. Start the frontend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+The app will usually open at http://localhost:3000.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## API Overview
 
-### Analyzing the Bundle Size
+The backend exposes REST endpoints for products, authentication, cart operations, and orders. The product list endpoint used during local development is:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```http
+GET http://localhost:8080/api/products
+```
 
-### Making a Progressive Web App
+Authenticated endpoints require a valid JWT bearer token.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Project Structure
 
-### Advanced Configuration
+This repository contains the React frontend. The main application source is in `src/`, with components and feature folders for pages such as product details, shopping, authentication, and orders.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Developer
 
-### Deployment
+**Prakash A**  
+Aspiring Java Full Stack Developer
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- GitHub: https://github.com/Prakash312005-code
+- Project repository: https://github.com/Prakash312005-code/Tech-Gadget-store
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you find an issue or have a suggestion, feel free to open an issue in this repository.
